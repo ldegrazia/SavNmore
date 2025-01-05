@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using savnmore;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace savnmore.Models
 {
@@ -30,7 +31,7 @@ namespace savnmore.Models
         /// </summary>
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
     /// <summary>
@@ -67,7 +68,7 @@ namespace savnmore.Models
         /// </summary>
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
     /// <summary>

@@ -146,7 +146,7 @@ namespace savnmore.Controllers
              Store s = GetStore(weeklysale);
              Chain chain = _db.Chains.Single(i => i.Stores.Any(p => p.Id == s.Id));
              _db.Stores.Attach(s);
-            _db.Entry(weeklysale).State = EntityState.Deleted;
+            _db.Entry(weeklysale).State = (System.Data.Entity.EntityState)EntityState.Deleted;
             _db.SaveChanges();
         }
         public Store GetStore(WeeklySale ws)

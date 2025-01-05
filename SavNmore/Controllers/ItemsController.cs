@@ -9,6 +9,7 @@ using System.Web.Routing;
 using PagedList;
 using savnmore.Models;
 using savnmore.Services;
+using System.Data.Entity;
 
 namespace savnmore.Controllers
 { 
@@ -146,7 +147,7 @@ namespace savnmore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(item).State = EntityState.Modified;
+                _db.Entry(item).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
                 _db.SaveChanges();
                 int id = GetWeeklySaleId(item);
                 return RedirectToAction("Index", new {id});

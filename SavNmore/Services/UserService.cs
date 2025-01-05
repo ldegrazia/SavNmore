@@ -338,7 +338,7 @@ namespace savnmore.Services
             }
             PhotoService ps = new UserPhotoService(usr.UserName);
             usr.Photo = ps.UpdatePhoto(usr.Photo, userPhoto);
-            _db.Entry(usr).State = EntityState.Modified;
+            _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
             _db.SaveChanges();
             return usr;
         }
@@ -390,7 +390,7 @@ namespace savnmore.Services
             {
                 usr.LastLogon = DateTime.Now;
             }
-            _db.Entry(usr).State = EntityState.Modified;
+            _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
             _db.SaveChanges();
             return usr;
         }
@@ -404,7 +404,7 @@ namespace savnmore.Services
             var usr = _db.Users.Single(p => p.UserId == userId);
             usr.IsOnline = true;
             usr.LastLogon = DateTime.Now;
-            _db.Entry(usr).State = EntityState.Modified;
+            _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
             return true;
         }
         /// <summary>
@@ -416,7 +416,7 @@ namespace savnmore.Services
         {
             var usr = _db.Users.Single(p => p.UserId == userId);
             usr.IsOnline = false;
-            _db.Entry(usr).State = EntityState.Modified;
+            _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
             _db.SaveChanges();
             return true;
         }
@@ -429,7 +429,7 @@ namespace savnmore.Services
         {
             var usr = _db.Users.Where(t => t.AppName == _appName).Single(p => p.UserName == userName);
             usr.IsOnline = false;
-            _db.Entry(usr).State = EntityState.Modified;
+            _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
             _db.SaveChanges();
             return true;
         }
@@ -514,7 +514,7 @@ namespace savnmore.Services
                 {
                     theuser.IsOnline = true;
                     theuser.LastLogon = DateTime.Now;
-                    _db.Entry(theuser).State = EntityState.Modified;
+                    _db.Entry(theuser).State = (System.Data.Entity.EntityState)EntityState.Modified;
                     _db.SaveChanges();
                 }
                 return theuser != null;
@@ -557,7 +557,7 @@ namespace savnmore.Services
                 }
 
                 usr.Password = newpswd;
-                _db.Entry(usr).State = EntityState.Modified;
+                _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
                 return true;
             }
@@ -759,7 +759,7 @@ namespace savnmore.Services
                 var newpswd = FormsAuthentication.HashPasswordForStoringInConfigFile(newPassword, Constants.HashMethod);
                 var usr = _db.Users.Single(p => p.UserId == userId);
                 usr.Password = newpswd;
-                _db.Entry(usr).State = EntityState.Modified;
+                _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
             }
             catch (Exception ex)
@@ -778,7 +778,7 @@ namespace savnmore.Services
             {
                 var usr = Get(userId);
                 usr.IsOnline = false;
-                _db.Entry(usr).State = EntityState.Modified;
+                _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
                 return true;
             }
@@ -798,7 +798,7 @@ namespace savnmore.Services
             {
                 var usr = Get(userName);
                 usr.IsOnline = false;
-                _db.Entry(usr).State = EntityState.Modified;
+                _db.Entry(usr).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
                 return true;
             }

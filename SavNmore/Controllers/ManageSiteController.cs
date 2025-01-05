@@ -94,7 +94,7 @@ namespace savnmore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(chain).State = EntityState.Modified;
+                _db.Entry(chain).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,9 +117,9 @@ namespace savnmore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(store).State = EntityState.Modified;
+                _db.Entry(store).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
-                _db.Entry(store.Address).State = EntityState.Modified;
+                _db.Entry(store.Address).State = (System.Data.Entity.EntityState)EntityState.Modified;
                 _db.SaveChanges();
                 Chain chain = _db.Chains.Include("Stores").Single(i => i.Id == store.Id);
                 return RedirectToAction("Details", new { id = chain.Id });
@@ -164,7 +164,7 @@ namespace savnmore.Controllers
             //get this store
              Store s = GetStore(weeklysale);
              Chain chain = _db.Chains.Single(i => i.Stores.Any(p => p.Id == s.Id));
-            _db.Entry(weeklysale).State = EntityState.Deleted;
+            _db.Entry(weeklysale).State = (System.Data.Entity.EntityState)EntityState.Deleted;
             _db.SaveChanges();
             return RedirectToAction("Details",new{id=chain.Id});
         }
@@ -284,7 +284,7 @@ namespace savnmore.Controllers
                 WeeklySale weeklysale = _db.WeeklySales.Find(sale.Id);
                 //get this store
                  
-                _db.Entry(weeklysale).State = EntityState.Deleted;
+                _db.Entry(weeklysale).State = (System.Data.Entity.EntityState)EntityState.Deleted;
                 
             }
             _db.SaveChanges();

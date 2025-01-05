@@ -324,7 +324,7 @@ namespace savnmore.Services
             rol.Name = updatedRole.Name;
             rol.AppName = _appName;
             rol.Description = updatedRole.Description;
-            _db.Entry(rol).State = EntityState.Modified;
+            _db.Entry(rol).State = (System.Data.Entity.EntityState)EntityState.Modified;
             _db.SaveChanges();
         }
         /// <summary>

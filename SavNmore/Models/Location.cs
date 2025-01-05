@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace savnmore.Models
 {
     public class ZipCodeEntry
@@ -7,7 +8,6 @@ namespace savnmore.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)] 
         [Display(Name = "Zip")]
-        [MaxLength(15)] 
         [Required(ErrorMessage = "Zip is required.")]
         public string ZipCode { get; set; }
         [Display(Name = "Latitude")]
@@ -17,7 +17,6 @@ namespace savnmore.Models
         [Required(ErrorMessage = "Longitude is required.")]
         public double Longitude { get; set; }
         [Display(Name = "City")]
-        [MaxLength(255)] 
         public string City { get; set; }
         public int? StateId { get; set; }
     }

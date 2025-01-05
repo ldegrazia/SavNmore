@@ -85,7 +85,7 @@ namespace savnmore.Controllers
 
                 foreach (var zipcode in _db.ZipCodes)
                 {
-                    _db.Entry(zipcode).State = EntityState.Deleted;
+                    _db.Entry(zipcode).State = (System.Data.Entity.EntityState)EntityState.Deleted;
 
                 }
                 _db.SaveChanges();
