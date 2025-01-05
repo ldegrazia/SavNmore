@@ -1,0 +1,52 @@
+﻿@using savnmore.Models
+@model IEnumerable<StoreShoppingList>
+@{
+    ViewBag.Title = "Printable Shopping List";
+     
+}
+@{     Layout = ""; }     
+  <link href="@Url.Content("~/Content/slist.css")" rel="stylesheet" type="text/css" />
+<h4><img src="../../images/favicon.png" width="50px" alt="SavNmore.com" /> 
+My Savly.com Shopping List</h4>
+<div>
+@{
+    if (!Model.Any())
+    {
+        <text>There are no items on your list.</text>
+    }
+}
+@foreach (StoreShoppingList storeList in Model)
+{
+    <div class="print_shoppinglist">
+        @Html.DisplayFor(model => storeList.Store.Name) 
+        <div class="storeaddress">
+        @Html.DisplayFor(model => storeList.Store.Address.Address1) 
+        @Html.DisplayFor(model => storeList.Store.Address.City), @Html.DisplayFor(model => storeList.Store.Address.State) 
+            @Html.DisplayFor(model => storeList.Store.Address.Zip) 
+            </div>    
+    </div>
+     <table class="shoppinglist_table">
+        <tr>
+            <th>Qty</th>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+        @foreach (Item i in storeList.Items)
+        {
+          
+            <tr>
+                <td class="sl_td sl_qty">@i.Quantity </td>
+                <td class="sl_td"> @Html.DisplayFor(model => i.Name)<br />
+             <div style="font-size:0.8em;">@Html.DisplayFor(model =>@i.Description)</div></td>
+                <td class="sl_td sl_price"> @Html.DisplayFor(model =>i.Price)</td>
+             </tr>
+        }
+         <tr >
+             <td colspan="2" class="sl_td sl_total_label"> Approximate Store Total:</td>
+                 
+                <td class="sl_td sl_total"> @Html.DisplayFor(model => storeList.Total)</td>
+             </tr>
+    </table>
+  
+}
+ </div>

@@ -1,0 +1,79 @@
+﻿@model savnmore.Models.MaxDistance
+
+@{
+    ViewBag.Title = "Calculate Distance";
+}
+<h2>Distance</h2>
+
+      @using (Html.BeginForm())
+      {
+           <p> 
+            Find zip codes within 5 miles of Zip @Html.TextBox("zipsearch", ViewBag.CurrentZipSearch as string)   
+               <input type="submit" value="Go" title="Go" />
+               </p> 
+      }
+<table>
+    <tr>
+        <td colspan="2">
+            Zip codes within @Html.DisplayFor(model=>model.Miles) mile(s) of @Html.DisplayFor(model => model.ZipCode) 
+        </td>
+    </tr>
+    <tr>
+        <td>Latitude: @Html.DisplayFor(model => model.Latitude)</td>
+        <td>Longitude: @Html.DisplayFor(model => model.Longitude)</td>
+    </tr>
+    <tr>
+        <td>Min:  @Html.DisplayFor(model => model.MinLatitude)</td>
+        <td>Min:  @Html.DisplayFor(model => model.MinLongitude)</td>
+    </tr>
+    <tr>
+        <td>Max: @Html.DisplayFor(model => model.MaxLatitude)</td>
+        <td>Max: @Html.DisplayFor(model => model.MaxLongitude)</td>
+    </tr>
+</table>
+<p>Search Results</p>
+<table>
+    <tr>
+        <td valign="top"><p>Stores Close By</p>
+<table>
+    <tr>
+        <th>Store Name</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+    </tr>
+    @foreach(var ze in @Model.CloseStores)
+    {
+
+        <tr>
+            <td>@ze.Name</td>
+            <td>@ze.Address.City</td>
+            <td>@ze.Address.State</td>
+            <td>@ze.Address.Zip</td>
+        </tr>
+
+    }
+</table></td>
+        <td valign="top"><p>Zip Codes</p>
+<table>
+    <tr>
+        <th>Zip Code</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>City</th>
+    </tr>
+ @foreach(var ze in @Model.ZipCodes)
+{
+
+    <tr>
+        <td>@ze.ZipCode</td>
+        <td>@ze.Latitude</td>
+        <td>@ze.Longitude</td>
+        <td>@ze.City</td>
+    </tr>
+
+}
+</table></td>
+    </tr>
+</table>
+

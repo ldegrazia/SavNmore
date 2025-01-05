@@ -1,0 +1,42 @@
+﻿@model savnmore.Models.User
+
+@{
+    ViewBag.Title = "Cancel Account";
+}
+ @using (Html.BeginForm()) {
+<h3>Are you sure you want to cancel your account?</h3>
+<fieldset>
+    <legend>Confirm Cancel Account</legend>
+    @Html.HiddenFor(model=>model.UserId)
+    <div class="display-label">FirstName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">UserName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+ 
+    <div class="display-label">Photo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Photo)
+    </div>
+     
+</fieldset>
+
+    <p>
+        <input type="submit" value="Delete" /> |
+         <a><input  type="button" value="Cancel" onclick="location.href='@Url.Content("~/Home/Index")'" /></a>
+    </p>
+}

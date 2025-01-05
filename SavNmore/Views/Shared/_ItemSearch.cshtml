@@ -1,0 +1,50 @@
+﻿@model IEnumerable<savnmore.Models.ItemSearchResult>
+<script type="text/javascript">
+   
+</script>
+<div>
+@{ if(!Model.Any())
+   {
+       <div>
+           No matching items found.
+           <p>
+           Try expanding your search or changing your search term.
+           </p>
+       </div>
+   }
+   else
+   {
+   foreach (var storeResult in Model)
+         {
+             <!-- Display the store details -->
+            if(!storeResult.RelatedItems.Any())
+            {
+                   <div>
+                    <p>No matching sale items at  @storeResult.Store.Name. @Html.ActionLink("Go to this store", "Details", "Store", new { id = @storeResult.Store.Id },null)
+                    </p>
+                </div>
+            }
+            else
+            {
+               
+                <div>
+                    
+                        @storeResult.RelatedItems.Count() similar items on sale at @storeResult.Store.Name. @Html.ActionLink("Go to this store", "Details", "Store", new { id = @storeResult.Store.Id }, null)
+                     <input type="button" value="Show/Hide"/>
+                    <div>
+                        @{Html.RenderPartial("_ItemSearchResult", storeResult );}
+                        </div>
+                </div>
+                <p>
+                      <a href="#top">top of page</a>  
+                </p>
+              
+            }
+    
+         }  
+   }
+}
+</div>
+
+
+ 

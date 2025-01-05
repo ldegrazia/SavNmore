@@ -1,0 +1,133 @@
+﻿@model PagedList.IPagedList<savnmore.Models.ZipCodeEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    function LoadZipCodes() {
+        $('#loadingDiv').show();
+        $('#result').html("Loading Zip codes...");
+        var data = {};
+        $.post('/Location/LoadZipCodes', data, Loaded);
+    }
+    function Loaded(result) {
+        $('#loadingDiv').hide();
+        //get the remove button and show it
+        $('#result').html(result);
+    }
+</script>
+
+<p>
+    <input type="button"  value="Load Zip Codes" onclick="LoadZipCodes();"/><img style="display: none;" id="loadingDiv" src="../../images/spinner.gif" alt="Loading..."/>
+    <br/>
+    <span id="result"></span>
+                       
+</p>
+<em>Current Zip Codes ordered by @ViewBag.SortColumn @ViewBag.CurrentSortOrder</em>
+<p>
+    @using (Html.BeginForm()) 
+    { 
+        <p> 
+            Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)   
+            <input type="submit" value="Search" /></p> 
+
+    }
+</p>
+<div> 
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    of @Model.PageCount 
+      
+    @if (Model.HasPreviousPage) 
+    { 
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+    } 
+    else 
+    { 
+        @:<< 
+        @Html.Raw(" "); 
+        @:< Prev 
+    } 
+      
+    @if (Model.HasNextPage) 
+    { 
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+    } 
+    else 
+    { 
+        @:Next > 
+        @Html.Raw(" ") 
+        @:>> 
+    } 
+</div>
+<table>
+    <tr>
+        <th>
+           @Html.ActionLink("Zip Code", "Index", new { sortColumn = "Zip", sortOrder = ViewBag.NextSortOrder,currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+             @Html.ActionLink("Latitude", "Index", new { sortColumn = "Latitude", sortOrder = ViewBag.NextSortOrder, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+               @Html.ActionLink("Longitude", "Index", new { sortColumn = "Longitude", sortOrder = ViewBag.NextSortOrder, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+             @Html.ActionLink("City", "Index", new { sortColumn = "City", sortOrder = ViewBag.NextSortOrder, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        
+         
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+         <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+         
+    </tr>
+}
+
+</table>
+<div> 
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    of @Model.PageCount 
+      
+    @if (Model.HasPreviousPage) 
+    { 
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+    } 
+    else 
+    { 
+        @:<< 
+        @Html.Raw(" "); 
+        @:< Prev 
+    } 
+      
+    @if (Model.HasNextPage) 
+    { 
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+    } 
+    else 
+    { 
+        @:Next > 
+        @Html.Raw(" ") 
+        @:>> 
+    } 
+</div>

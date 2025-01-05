@@ -1,0 +1,54 @@
+﻿@model savnmore.Models.Role
+
+@{
+    ViewBag.Title = "Edit";
+}
+ 
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" })){
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend> <img class="small"  src="@Url.Content("~/images/edit.png")"    title="Edit"  alt="Edit" />Edit Role</legend>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.RoleId) :&nbsp; @Html.DisplayFor(m => m.RoleId) &nbsp; 
+            @Html.HiddenFor(m => m.AppName)
+                 
+                   @Html.HiddenFor(m => m.RoleId)
+              </div>
+              <div class="editor-label">
+                  @Html.LabelFor(m => m.Name):&nbsp; @Html.TextBoxFor(m => m.Name) &nbsp; 
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+         <div class="editor-label">
+             @Html.LabelFor(m => m.IsReadOnly) :&nbsp; @Html.DisplayFor(m => m.IsReadOnly)
+             <p>
+             <em>Readonly roles cannot be renamed or deleted. Readonly members cannot be removed.</em>
+               </p>
+                @Html.ValidationMessageFor(m => m.IsReadOnly)
+            </div>
+         <p>
+         <img height="100" width="100" src="@Url.Action("RolePhoto", "Admin", new { name = @Model.Photo})" alt="@Model.Photo" title="@Model.Name"/> 
+       </p>
+            <div class="editor-label">Update Photo:</div>
+            
+         <div class="editor-field">
+         <input type="file" name="photo" id="photo" />
+         </div>
+               <div class="editor-label">
+                  @Html.LabelFor(m => m.Description)
+              </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Description, new { @class = "mediumtextarea" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        
+
+        <p>
+            <input type="submit" title="Save Changes" value="Save" />
+            <a><input  type="button"  title="Abandon changes"  value="Cancel" onclick="location.href='@Url.Content("~/Admin/Index")'" /></a>
+        </p>
+    </fieldset>
+}

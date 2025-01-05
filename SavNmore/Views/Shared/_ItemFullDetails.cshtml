@@ -1,0 +1,46 @@
+﻿@model Item
+@using savnmore.Models;
+<div class="itemfulldetailsdiv">
+      <div class="itemfulldetailsimg">
+         <img   src="@Model.ImageUrl" alt="@Model.Name"/>
+          </div>
+    <div class="itemfulldetails">
+        <h2>@Html.DisplayFor(modelItem=> @Model.Name)</h2>
+        <div class="itemfulldescription">
+             <span class="storename">On sale at @ViewBag.StoreName </span><br/>
+            
+                  @Html.DisplayFor(modelItem => @Model.Description) 
+             
+               
+ 
+          
+        </div>
+        <div class="itemfulldetailsprice">
+             
+            @Html.DisplayFor(modelItem => @Model.Price)
+        </div>
+        <div class="itemfulldetailsmenu">
+            <input  type="image"   src="../../images/checklist-icon.png" title="Go to your shopping list"    alt="Go to your shopping list"   onclick="location.href='@Url.Content("~/ShoppingList/Index")'" />
+            <input type="image"  
+                   alt="Add 1 item to your shopping list"  
+                   title="Add 1 item to your shopping list"  
+                   src="../../images/add-icon.png"  
+                   onclick="AddItemShowTotal('@Model.Id','@ViewBag.StoreId');"/>
+            @{
+                string id = "r" + Model.Id;
+                string show = "none";//visibility:
+                if (Model.OnList)
+                {
+                    show = "";
+                }
+            }
+            <input id='@id' style="display:@show" type="image" 
+                   src="../../images/remove-icon.png" 
+                   title="Remove this item from your shopping list" 
+                   alt="Remove this item from your shopping list"  
+                   onclick="RemoveItemShowTotal('@Model.Id','@ViewBag.StoreId');"/>
+                       
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

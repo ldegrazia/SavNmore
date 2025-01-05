@@ -1,0 +1,27 @@
+﻿@model savnmore.Models.Role
+
+@{
+    ViewBag.Title = "Delete Role?";
+}
+ @using (Html.BeginForm( "DeleteRole", "Admin", FormMethod.Post))
+{
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/warning.png")"    title="Delete?"  alt="Delete?" />Delete This role?</legend>
+
+    <div class="display-label">Name: @Html.DisplayFor(model => model.Name) 
+    </div>
+
+    <div class="display-label">Description: @Html.DisplayFor(model => model.Description)
+    </div>
+     <p>
+         <img height="100" width="100" src="@Url.Action("RolePhoto", "Admin", new { name = @Model.Photo})" alt="@Model.Photo" title="@Model.Name"/> 
+       </p>
+
+
+    <p>
+           @Html.HiddenFor(model => model.RoleId)
+        <input type="submit" value="Delete" title="Delete Role"/>    
+        <a><input  type="button" value="Cancel" title="Abandon changes"  onclick="location.href='@Url.Content("~/Admin/index")'" /></a>
+    </p>
+    </fieldset>
+}

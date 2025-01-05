@@ -1,0 +1,51 @@
+﻿@model IEnumerable<savnmore.Models.User>
+
+@{
+    ViewBag.Title = "Users Online";
+}
+<h3>(@Model.Count()) Users Online  | @Html.Partial("_AdminNavigationPartial")</h3>
+<table class="admin">
+        <tr>
+               
+            <th>
+                Username
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Last Logon
+            </th>
+            <th>
+                Online?
+            </th>
+            <th> </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                 
+                 
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastLogon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsOnline)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new {userId = item.UserId}) |  
+                    @Html.ActionLink("Delete", "Delete", new {userId = item.UserId})
+             
+                </td>
+            </tr>
+        }
+
+    </table>

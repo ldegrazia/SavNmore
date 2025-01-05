@@ -1,0 +1,15 @@
+﻿@model savnmore.Models.Chain
+
+@{
+    ViewBag.Title = @Model.Name + " Stores";
+}
+<h3>@Model.Name Stores (@Model.Stores.Count())</h3>
+ 
+     @{Html.RenderPartial("_StoreSearch", Model.Stores);}
+<p>
+     Don't see your store? @Html.ActionLink("Let us know!","Contact","Home") 
+</p>
+<p>
+     @Html.ActionLink("Back to Chains", "Index")
+</p>
+ 

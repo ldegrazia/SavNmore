@@ -1,0 +1,37 @@
+﻿@model savnmore.Models.ItemSearchResult
+   @foreach (var itm in Model.RelatedItems)
+                        {
+                            //show all the items that are related for this store
+                           <text>
+                    <div class="itemdetail">
+                            <div class="itemdetail_image">
+                                        <img  src="@itm.ImageUrl" title="@itm.Name"  alt="@itm.Name"/>
+                                         </div>
+                            <div class="itemfulldetails">
+                                        @Html.ActionLink(@itm.Name, "Details", "Items", new { id = itm.Id },null)
+                                <br/>
+                                 <span class="storename">at @Model.Store.Name </span><br/>
+                            <div class="itemfulldescription">
+                                            @Html.DisplayFor(modelItem => itm.Description)
+                                        </div>
+                            <div class="itemfulldetailsprice">
+                                            @Html.DisplayFor(modelItem => itm.Price)
+                                </div>
+                             <div class="itemfulldetailsmenu">
+                                         <input  type="image"   src="../../images/checklist-icon.png" title="Go to your shopping list"    alt="Go to your shopping list" onclick="location.href='@Url.Content("~/ShoppingList/Index")'"/>
+                                        <input type="image"  alt="Add 1 item to your shopping list"  title="Add 1 item to your shopping list"   src="../../images/add-icon.png"  onclick="AddItemShowTotal('@itm.Id','@Model.Store.Id');"/>
+                                        @{
+                                            string id = "r" + itm.Id;
+                                            string show = "none";//visibility:
+                                            if (itm.OnList)
+                                            {
+                                                show = "";
+                                            }
+                                        }
+                                        <input id='@id' style="display:@show" type="image"    src="../../images/remove-icon.png"   alt="Remove 1 item from your shopping list" title="Remove item from your shopping list" onclick="RemoveItemShowTotal('@itm.Id','@Model.Store.Id');"/>
+                                </div>
+                     </div>
+                            <div class="clear"></div>
+               </div> 
+                           </text>
+                        }

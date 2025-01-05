@@ -1,0 +1,53 @@
+﻿@model savnmore.Models.Role
+
+@{
+    ViewBag.Title = "Create";
+} 
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+ 
+    <fieldset>
+        <legend> <img class="small"  src="@Url.Content("~/images/addroles.png")"    title="New"  alt="New" />Create New Role</legend>
+         @Html.ValidationSummary()
+        <div>
+            @Html.HiddenFor(model=> model.AppName)
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)&nbsp;: 
+                @Html.TextBoxFor(m => m.Name)  
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.IsReadOnly)&nbsp;:
+             
+                @Html.CheckBoxFor(m => m.IsReadOnly)
+                @Html.ValidationMessageFor(m => m.IsReadOnly)
+                <br />
+                <em>Readonly roles cannot be renamed or deleted. Readonly members cannot be removed.</em> 
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Description)&nbsp;:
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Description, new { @class = "mediumtextarea" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+            <p>
+                <img height="100" width="100" src="@Url.Action("RolePhoto", "Admin", new { name = string.Empty})" alt="Default Photo" title="Default Photo"/> 
+            </p>
+            <div class="editor-label">Role Photo:</div>
+            
+            <div class="editor-field">
+                <input type="file" name="photo" id="photo" />
+            </div>
+        </div>
+        <p>
+            <input type="submit" title="Save Changes" value="Create Role" /> 
+            <a><input  type="button" value="Cancel" title="Abandon changes" onclick="location.href='@Url.Content("~/Admin/Index")'" /></a>
+        </p>
+       
+    </fieldset>
+}
+
+ 

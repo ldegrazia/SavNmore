@@ -1,0 +1,13 @@
+﻿@using System.Web;
+@*@{ 
+    Layout = Request.Browser.IsMobileDevice ? "~/Views/Shared/_LayoutMobile.cshtml" 
+                                            : "~/Views/Shared/_Layout.cshtml"; 
+}*@
+@*
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+                                             
+}*@
+@{
+    Layout = (bool) HttpContext.Current.Session["ismobile"] ? "~/Views/Shared/_LayoutMobile.cshtml" : "~/Views/Shared/_Layout.cshtml";
+}

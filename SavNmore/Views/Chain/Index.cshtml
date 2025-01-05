@@ -1,0 +1,50 @@
+﻿@model IEnumerable<savnmore.Models.Chain>
+
+@{
+    ViewBag.Title = "SavNmore.com Chains";
+}
+<div id="findstoresnear">
+    @using (Html.BeginForm("FindStoresNear","Location",FormMethod.Post,null))
+    {
+        <text><label>Find stores within</label>  @Html.DropDownList("FindMiles") 
+            <span class="ofzip">of Zip</span> @Html.TextBox("zipsearch", ViewBag.CurrentZipSearch as string)
+            <input id="findstoresnearbutton" value="Go" type="image"  src="../../images/go.png"/>   </text>
+        <input value="Go" type="submit" class="mobilesubmit"/>
+    }
+  
+</div>
+  <div class="clear"></div>
+ 
+<div class="list_wrapper">
+     
+        @foreach (var item in Model)
+        {
+             
+                <div class="chaindetail">
+                    <div class="chaindetail_top">
+                        
+                            <img src="@item.ImageUrl" alt="@item.Name" title="@item.Name has @item.Stores.Count stores."/>                     
+                         
+                        <h2> @Html.ActionLink(@item.Name, "Details", new { id = item.Id }, new { title = "View this store's sales" })</h2>
+                       
+                       
+                    </div>
+                    <div class="chaindetail_bottom">
+                          <p>
+                            @item.Stores.Count Stores
+                        </p>
+                        @Html.ActionLink("View All Stores", "Details", new { id = item.Id }) 
+                    </div>
+                </div>
+            
+        }
+   
+  
+</div>  
+<div class="clear"></div>
+ <p>
+     Don't see your store? @Html.ActionLink("Let us know!", "Contact", "Home") 
+</p>
+ 
+ 
+ 

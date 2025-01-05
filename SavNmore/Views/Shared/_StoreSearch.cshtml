@@ -1,0 +1,48 @@
+﻿@using savnmore.Models
+@model IEnumerable<savnmore.Models.Store>
+ 
+@if (Model.Any())  
+{ 
+       <div class="list_wrapper">
+             @foreach (var item in Model)
+             {   
+                <div class="storedetail">
+                    <div class="storedetail_top">
+                    <h2>@Html.ActionLink(@item.Name, "Details", "Store", new { id = item.Id }, null)</h2>  
+                 
+                        <div class="storeaddress">
+                            @Html.DisplayFor(modelItem => item.Address.Address1) <br/>
+                            @Html.DisplayFor(modelItem => item.Address.City), @Html.DisplayFor(modelItem => item.Address.State) 
+                            @Html.DisplayFor(modelItem => item.Address.Zip) 
+                        </div>
+                        
+                    </div> 
+                    <div class="storedetail_bottom">
+                             <div class="weeklysalesimg">
+                                 <img width="50px" src="../../images/sales.png" alt="Weekly Shopping Made Easy" title="Weekly Shopping Made Easy" />   
+                             </div>
+                             <div class="weeklysales">
+                                 @foreach(WeeklySale ws in item.WeeklySales)
+                                 {
+                                     <text> 
+                                         @Html.ActionLink(@ws.SaleItems.Count() +" Items on sale until " + @Html.DisplayFor(w => ws.EndsOn), "Index", "Items", new { id=ws.Id },null)<br/>
+               
+                                     </text>
+  
+                                 }
+                             </div>
+                             <div class="clear"></div> 
+                     </div>
+                        
+                     </div> 
+             }   
+     </div> 
+     <div class="clear"></div>   
+}
+else
+{
+ <h3>Sorry, there are no stores found.</h3> 
+<text><p>
+     Don't see your store? @Html.ActionLink("Let us know!", "Contact", "Home") 
+</p></text>
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<savnmore.Models.Chain>
+
+@{
+    ViewBag.Title = "Site Management";
+}
+
+<h2>Manage Site</h2>
+
+<p>
+    @Html.ActionLink("Create a New Chain", "Create")
+</p>
+ 
+
+@foreach (var item in Model) {
+    <div class="bigspace">
+    <h2> @Html.DisplayFor(modelItem => item.Name)</h2>
+           
+       
+           <img src="@item.ImageUrl" alt="@item.ImageUrl" />
+        <p>
+        @Html.DisplayFor(modelItem => item.Url)
+        </p> 
+        
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id })  
+            @Html.ActionLink("Details", "Details", new { id=item.Id })  
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+         </div>
+}
+
+ 

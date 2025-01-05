@@ -1,0 +1,63 @@
+﻿@using savnmore.Models
+@model IEnumerable<Role>
+@{
+    ViewBag.Title = "Administration";
+}
+<div id="admindiv">
+
+   
+    <div id="rolesdiv">
+        <img class="left small"  src="@Url.Content("~/images/users.png")"    title="Role Management"  alt="Role Management" />
+        <h2>Role Management</h2>        
+        <ul>
+            <li>@Html.ActionLink("Manage Roles", "Roles", "Admin", new { pager = new Pager(), page = 0 }, new { @title = "Edit and delte roles, add members to roles" })<br />
+            </li>
+            <li>@Html.ActionLink("Create a New Role", "Create", null, new { @title = "Create a new role" })<br />
+            </li>
+        </ul>
+            <img class="left small" src="@Url.Content("~/images/user.png")"  width="30" height="30" title="User Management"  alt="User Management" />
+     <h2>User Management</h2>        
+        <ul>
+            <li>@Html.ActionLink("Manage Users", "Users", "Admin", new { pager = new Pager(), page = 0 }, new { @title = "Edit and delete users" })
+                <br />
+            </li>
+            <li>@Html.ActionLink("Create a New User", "CreateUser", null, new { @title = "Create a new user" })<br />
+            </li>
+            <li>@Html.ActionLink("Whos Online?", "WhosOnline", null, new { @title = "Find out who is online now" })<br />
+            </li>
+            <li>@Html.ActionLink("Who has the latest Last Logon time?", "LatestLastLogons", null, new { @title = "Find users that have not logged on recently" })<br />
+            </li>
+            <li>@Html.ActionLink("Who has to reset their password?", "PasswordResets", null, new { @title = "Find open password resets that have not been completed" })<br />
+            </li>
+        </ul>
+        <img class="left small" src="@Url.Content("~/images/settings.png")"   title="Site Settings"  alt="Site Settings" />
+        <h2>Site Settings</h2>
+        <ul>
+            <li>Current Application Name:<strong> @ViewBag.CurrentAppName</strong></li>
+            <li>Site name: @ViewBag.SiteName</li>
+            <li>Version: @ViewBag.Version</li>
+            <li>@ViewBag.NumberOfUsers Users (@ViewBag.NumberOfUsersOnline online), @ViewBag.NumberOfRoles Roles<br /></li>
+            @if(ViewBag.IsSuperAdmin )
+            {
+                <li>@Html.ActionLink("Manage Applications", "ApplicationName", null, 
+             new { @title = "Change your current application name context and manage another application name" })</li>          
+               
+            <li>@Html.ActionLink("View more site settings", "SiteSettings",null,
+            new { @title = "View site settings like database setings and configurations" })</li> 
+            }         
+           
+            
+        </ul>
+    </div>
+    <div id="admininstructionsdiv">
+       <p>
+        Use the links to manage users, roles and see details about your current site
+        settings.
+    <br />
+            Create roles, add and remove members, delete roles and change role pictures.<br />
+            Create users, add and delete users, edit user details and change user passwords.</p>
+    </div>
+    <div style="clear: both;">
+    </div>
+    
+</div>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<savnmore.Models.User>
+
+@{
+    ViewBag.Title = "Role Search Results";
+}
+<script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/utilities.js")" type="text/javascript"></script>
+<h3>@ViewBag.Role.Name Search Results (@Model.Count() members found). | @Html.ActionLink("Return to Members", "Details", "Admin", new { id = @ViewBag.Role.RoleId },null) | @Html.Partial("_AdminNavigationPartial")</h3>
+ 
+@using (Html.BeginForm("RemoveMultipleUsers", "Admin", new { roleId = @ViewBag.Role.RoleId }, FormMethod.Post, new { @onsubmit = "return confirmRemove()" }))
+{
+    
+    <table class="admin">
+        <tr>
+             <th><input title="Check/Uncheck all" type="checkbox" name="checkuncheckall" value="Check/Uncheck all" onclick="checkUncheckAll()" /> </th>
+            <th>
+                Photo
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Last Logon
+            </th>
+            <th>
+                Online?
+            </th>
+              <th>
+                Read Only?
+            </th>
+            <th><input title="Remove all checked users." type="submit" value="Remove Selected" /></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input title="Check/Uncheck"  type="checkbox" name="deleteInputs" value="@item.UserId" />         
+                </td> 
+                <td>
+                    <img height="100" width="100" src="@Url.Action("UserPhoto", "Admin", new { name = item.Photo, userName = item.UserName })" alt="@item.Tooltip()" title="@item.Tooltip()"/> 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastLogon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsOnline)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.IsReadOnly)
+                </td>
+                <td>
+                   @Html.ActionLink("Remove", "RemoveUserFromRole", new { roleId = @ViewBag.Role.RoleId, userID = @item.UserId }) 
+                </td>
+            </tr>
+        }
+
+    </table>
+}

@@ -1,0 +1,36 @@
+﻿@model savnmore.Models.User
+
+@{
+    ViewBag.Title = "Delete User?";
+}
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/warning.png")"    title="Delete?"  alt="Delete?" />Delete This User?</legend>
+
+    <div class="display-label">FirstName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">UserName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName) 
+    </div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+    <div class="display-label">IsOnline: &nbsp; @Html.DisplayFor(model => model.IsOnline)
+    </div>
+     <p>
+                    <img height="100" width="100" src="@Url.Action("UserPhoto", "Account", new { name = @Model.Photo,username = @Model.UserName})" alt="@Model.Photo"/> 
+                </p>
+
+@using (Html.BeginForm("Delete", "Admin", FormMethod.Post)){
+    <p>
+           @Html.HiddenFor(model => model.UserId)
+        <input type="submit"  title="Delete User"  value="Delete" />  
+        <a><input  type="button" value="Cancel" title="Dont delete"  onclick="location.href='@Url.Content("~/Admin/Users")'" /></a>
+    </p>
+}
+</fieldset>

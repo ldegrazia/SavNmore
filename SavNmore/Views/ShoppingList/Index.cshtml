@@ -1,0 +1,132 @@
+﻿@using System.Globalization
+@using savnmore.Models
+@model IEnumerable<savnmore.Models.StoreShoppingList>
+
+@{
+    ViewBag.Title = "My Shopping List";
+}
+  <script src="@Url.Content("~/Scripts/utilities.js")" type="text/javascript"></script> 
+<div class="page_wrapper"> 
+    
+     <div class="page_left">
+    <h3>My Shopping List 
+    @{if(Model.Any()){ 
+                               
+    <a><input  type="button" value="Printable View" title="View in a printer friendly page for printing." 
+     onclick="location.href='@Url.Content("~/ShoppingList/PrintList")'" /></a>}
+      }                                                                                                                                                                           </h3>
+    @{if (Model.Any())
+      {
+        
+        <p>Email this list
+         <input value="enter address" type="text" title="Enter an email address" id="email" />
+         <input type="button" title="Send"  value="Send"  onclick="EmailList();"/> 
+       </p>
+     
+      }
+      }
+     </div>
+    <div class="page_right">
+         @{
+             if (Model.Any())
+             {
+                 
+                
+           
+                 <div id="sort">
+                     @using (Html.BeginForm())
+                     {
+                         <label for="sortOrder">Sort items based on</label>
+                         @Html.DropDownList("sortOrder", (IEnumerable<SelectListItem>)ViewBag.SortOptions, new { onchange = "this.form.submit();" })
+                     }
+                 </div>
+             }
+         }
+    </div>
+
+        <div class="clear"></div> 
+        
+</div>
+ 
+ 
+
+<div>
+@{if (!Model.Any())
+  {
+      <div class="bigspace">
+          <p> There are no items on your list.
+               
+          </p>
+          </div>
+  }
+   
+}
+
+@foreach (StoreShoppingList storeList in Model)
+{
+    var ttl = "ttl" + storeList.Store.Id.ToString(CultureInfo.InvariantCulture);
+    <div class="shoppingliststorediv">
+        @Html.ActionLink(storeList.Store.Name, "Details", "Store", new { id = storeList.Store.Id }, null)<br/> 
+        <div class="storeaddress">
+        @Html.DisplayFor(model => storeList.Store.Address.Address1) 
+    @Html.DisplayFor(model => storeList.Store.Address.City),@Html.DisplayFor(model => storeList.Store.Address.State) 
+@Html.DisplayFor(model => storeList.Store.Address.Zip) </div>     
+    </div>
+    
+    <table class="listitems">
+        <tr>
+            <th>Qty</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>      </th>
+        </tr>
+        @foreach (Item i in storeList.Items)
+        {
+            var t = "t" + i.Id.ToString(CultureInfo.InvariantCulture);
+            var q = "q" + i.Id.ToString(CultureInfo.InvariantCulture);
+             
+            <tr id='@t'>
+                <td class="td_qty">
+                    <table class="qty">
+                        <tr>
+                            <td class="quantity" rowspan="2"><span id='@q'>@i.Quantity</span>
+                            </td>
+                        <td>
+                            <input type="image" width="20px" src="../../images/add.png" title="Add 1 item"  alt="Add 1 item"  onclick="Add1Item('@i.Id','@storeList.Store.Id');"/>  
+                        </td>
+                    </tr>
+                    <tr>
+                            
+                            <td>
+                                <input type="image"  width="20px"  src="../../images/remove.png"  title="Remove 1 item"  alt="Remove 1 item"  onclick="Remove1Item('@i.Id','@storeList.Store.Id');"/>
+                            </td>
+       
+                        </tr>
+                    </table>
+                   
+                </td>
+                <td class="td_name" >@Html.ActionLink(i.Name, "Details", "Items", new { id = i.Id }, null)<br/>
+                <div class="description">@i.Description</div>
+                </td>
+                <td class="td_price">@i.Price</td>
+                <td class="td_action"> <input type="image"    src="../../images/remove-icon.png"  title="Remove this item from your shopping list"   alt="Remove this item from your shopping list"  onclick="RemoveItemFromList('@i.Id','@storeList.Store.Id');"/>  </td>
+            </tr>
+        }
+        <tr>
+        <td class="td_border_top"></td>
+        <td class="td_border_top storeTotal">Approximate Store Total:</td>
+        <td class="td_border_top total"><div id="@ttl"> @Html.DisplayFor(model => storeList.Total)</div></td>
+        <td class="td_border_top"> <input type="button" value="Update" title="Made changes? Update the total."  onclick="window.location.reload()" /></td>
+        </tr>
+    </table>
+     
+
+}
+<div class="bigspace">
+    <p>
+        To find sale items, @Html.ActionLink("Click here to browse the store chains.","Index", "Chain") 
+    </p>
+    
+      </div>
+ 
+</div>

@@ -1,0 +1,112 @@
+﻿@using savnmore
+@using savnmore.Models;
+@model EditUser
+
+@{
+    ViewBag.Title = "Edit User";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend><img class="small"  src="@Url.Content("~/images/edit.png")"    title="Edit"  alt="Edit" />
+        Edit User or &nbsp;<img class="small"  src="@Url.Content("~/images/delete.png")"    title="Delete"  alt="Delete" /> @Html.ActionLink("Delete User", "Delete", new { userId = @Model.UserId })</legend>
+
+        @Html.HiddenFor(model => model.UserId)
+          <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)  
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+      
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)* &nbsp;
+            <em>(Leave the password field blank to prevent changing the existing password.)</em>
+        </div>
+        <div class="editor-field">
+            
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div> 
+        <div class="editor-label">
+            @Html.LabelFor(m => m.IsReadOnly):&nbsp; @Html.DisplayFor(m => m.IsReadOnly)
+             <br/>
+                <em>(@ErrorConstants.CannotChangeReadonlyUsers)</em>
+             
+            @Html.ValidationMessageFor(m => m.IsReadOnly)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsOnline):&nbsp;@Html.EditorFor(model => model.IsOnline)&nbsp;
+            @Html.ValidationMessageFor(model => model.IsOnline) 
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastLogon)
+        </div>
+      <div class="editor-field">
+            @Html.EditorFor(model => model.LastLogon) 
+            @Html.ValidationMessageFor(model => model.LastLogon)
+        </div>
+        
+        <div class="editor-label">Current Role Membership:<br />   
+        @if (ViewBag.Roles != null)
+        {                 
+            <text><ul>     
+           @foreach (var r in ViewBag.Roles)
+            {
+               <li>  @r </li>   
+            }
+             </ul></text>   
+        }
+        else
+        {
+            <text> User is not in any roles.</text>
+        }
+        </div>
+        <div class="editor-label">Add to Role:&nbsp;@Html.DropDownList("RoleId", (SelectList)ViewBag.AvailableRoles, "--No Role Change--") 
+            <span class="field-validation-error"> @ViewBag.NoRoleChosen</span>
+
+        </div>
+         <p>
+         <img height="100" width="100" src="@Url.Action("UserPhoto", "Admin", new { name = @Model.Photo,username = @Model.UserName})" alt="@Model.Photo" title="@Model.UserName"/> 
+       </p>
+            <div class="editor-label">Update Photo:</div>
+            
+         <div class="editor-field">
+         <input type="file" name="photo" id="photo" />
+         </div>
+        <p>
+            <input type="submit"  title="Save changes"  value="Save" />
+             <a><input  type="button" value="Cancel"  title="Abandon changes"  onclick="location.href='@Url.Content("~/Admin/Users")'" /></a>
+        </p>
+    </fieldset>
+}
+
+ 

@@ -1,0 +1,50 @@
+﻿ @{
+    ViewBag.Title = "SavNmore.com Home";
+ }
+<div id="featuredText">
+    <div class="leadin">
+        <strong>Change</strong> the way you shop for groceries! 
+        <br/>
+        @Html.ActionLink("Learn more..","About")
+    </div>
+    <img id="splash" src="../../images/featured_bg.jpg"   alt="whats new" />
+</div>
+ 
+ <div id="boxContainer">
+     <div class="box chains">
+       <h2>@Html.ActionLink("Chains","Index", "Chain")</h2>
+       <p>Browse through chains to see what is on sale this week.</p>
+     </div>
+     <div class="box local">
+       <h2>@Html.ActionLink("See Local Sales", "LocalSales", "Location")</h2>
+       <p>Browse through sale items that are nearby.</p>
+     </div>
+     <div class="box search">
+       <h2>@Html.ActionLink("Search For An Item", "FindAnItem", "Location")</h2>
+       <p> <strong>Looking for a specific item?</strong> Find out if it is on sale near you.</p>
+     </div>
+   </div>
+ 
+ 
+ <div id="leftCol">
+     <h2>Shop Smart</h2>
+     <p>Search through all of the weekly sales in your area with one click!</p>
+      
+  
+    
+     <div style="margin:20px;">
+ <p>
+   @{if(ViewBag.IsMobile ==true)
+     {   
+     
+      <a><input  type="button" value="Desktop Site" title="View our desktop site." 
+     onclick="location.href='@Url.Content("~/Home/Desktop")'" /></a>
+     }
+     else{   
+         <a><input  type="button" value="Mobile Site" title="View our mobile site." 
+     onclick="location.href='@Url.Content("~/Home/Mobile")'" /></a> 
+ 
+       
+     }
+     }
+     </p></div> </div>

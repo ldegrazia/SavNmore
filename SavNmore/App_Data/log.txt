@@ -1,0 +1,66 @@
+1:16:20 PM,Wednesday, August 01, 2012,Information,Table Creation exception:The specified table does not exist. [ EdmMetadata ]
+1:16:20 PM,Wednesday, August 01, 2012,Information,EdmMetadata Table not created...
+1:16:20 PM,Wednesday, August 01, 2012,Information,EdmMetadata Table Created...
+1:16:20 PM,Wednesday, August 01, 2012,Information,ModelHash Seeded...
+1:22:08 PM,Wednesday, August 01, 2012,Information,EdmMetadata Table populated with a record ...
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding Admin to Administrators
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding Admin to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Sample users and roles creation requested.
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding Level 1
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding Level 2
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding Premium Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 1user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 2user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 3user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 4user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 5user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 6user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 7user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 8user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 9user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 10user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 11user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 12user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 13user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 14user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 15user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 16user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 17user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 18user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 19user
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 1user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 2user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 3user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 4user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 5user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 6user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 7user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 8user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 9user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 10user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 11user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 12user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 13user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 14user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 15user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 16user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 17user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 18user to Users
+1:27:36 PM,Wednesday, August 01, 2012,Information,Adding 19user to Users
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 1user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 10user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 11user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 12user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 13user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 14user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 15user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 16user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 17user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 18user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 19user to Level 1
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 2user to Level 2
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 12user to Level 2
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 3user to Premium Users
+1:27:37 PM,Wednesday, August 01, 2012,Information,Adding 13user to Premium Users
+1:31:04 PM,Wednesday, August 01, 2012,Information,EdmMetadata Table populated with a record ...
+6:08:39 PM,Thursday, August 02, 2012,Error,Amdin,AstrongPassw0rd Logon Failed. Sequence contains no elements

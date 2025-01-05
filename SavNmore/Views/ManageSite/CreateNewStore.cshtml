@@ -1,0 +1,76 @@
+﻿@model savnmore.Models.Store
+
+@{
+    ViewBag.Title = "Create New Store";
+}
+
+<h2>Create New Store</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("CreateNewStore", "ManageSite", new { chainId = @ViewBag.ChainId }, FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>New Store</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url)
+            @Html.ValidationMessageFor(model => model.Url)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address.Address1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address.Address1)
+            @Html.ValidationMessageFor(model => model.Address.Address1)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address.City)
+            @Html.ValidationMessageFor(model => model.Address.City)
+        </div>
+         
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address.State)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address.State)
+            @Html.ValidationMessageFor(model => model.Address.State)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address.Zip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address.Zip)
+            @Html.ValidationMessageFor(model => model.Address.Zip)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to Chain", "Details", new { id = @ViewBag.ChainId })
+</div>

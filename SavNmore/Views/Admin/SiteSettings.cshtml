@@ -1,0 +1,147 @@
+﻿@model savnmore.Models.SiteSettings
+
+@{
+    ViewBag.Title = "Site Settings";
+}
+
+<h3>Site Settings | @Html.ActionLink("Back to Administration","Index")</h3>
+<p>
+    The following settings are set site wide in the web config. To change the settings edit them in the web config.
+    <br/>
+    <em>Some settings may not be valid if other settings are not used.</em>
+    <strong>Inproper settings may render your site non-functional.</strong>
+</p>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/web.png")"    title="Global Site Settings"  alt="Global Site Settings" />Global Site Settings</legend>
+
+    <div class="display-label">Application Name: &nbsp;<strong>
+                                                           @Html.DisplayFor(model => model.ApplicationName)</strong>
+    </div>
+    <div class="display-label">Log File: &nbsp;<strong>
+                                                   @Html.DisplayFor(model => model.LogFile)</strong> <br/>
+        <p>
+            @Html.ActionLink("Dump Log","DumpLog") | @Html.ActionLink("DeleteLog","DeleteLog",null,new{@onclick ="return confirm('You sure?');"})
+        </p>
+    </div>
+    <div class="display-label">Domain Email Suffix:&nbsp;<strong>
+        @Html.DisplayFor(model => model.DomainEmailSuffix)</strong>
+    </div>
+
+    <div class="display-label">Use Password Strength?: <strong>
+        @Html.DisplayFor(model => model.UsePasswordStrength)</strong>
+    </div>
+
+    <div class="display-label">Throw Error On Deleting Populated Roles?:&nbsp;<strong>@Html.DisplayFor(model => model.ThrowErrorOnDeletingPopulatedRoles)</strong><br/>
+        <em>(A setting of true will throw an error when a role is deleted that has members.)</em>
+    </div>
+    <div class="display-label">Number Of Items Per Page:<strong> @Html.DisplayFor(model => model.NumberOfItemsPerPage)</strong>
+        <br/><em>(The number if items to show per page in paged records)</em>
+    </div>
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/db.png")"    title="Database Settings"  alt="Database Settings" />Database Settings</legend>
+    <div class="display-label">Database Provider:&nbsp;<strong> @Html.DisplayFor(model=> model.DatabaseProvider)</strong>
+    </div>
+     <div class="display-label">Database Version:&nbsp;<strong> @Html.DisplayFor(model=> model.DatabaseVersion)</strong>
+    </div>
+     <div class="display-label">Connection String:</div>
+    <div class="display-field"><strong> @Html.DisplayFor(model=> model.ConnectionString)</strong>
+    </div>
+
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/images.png")"    title="Image Settings"  alt="Image Settings" />Image Settings</legend>
+    <div class="display-label">Role Images Root Path:&nbsp;<strong> @Html.DisplayFor(model => model.RoleImagesRootPath)</strong><br /><em>(The Path to the folder where role photos are stored.)</em>
+        
+    </div>
+     
+
+    <div class="display-label">Default Role Photo:&nbsp;<strong>
+        @Html.DisplayFor(model => model.DefaultRolePhoto)</strong><br /><em>
+                                                           (The default photo for roles, which should reside in the RolesImagesRootPath.)</em>
+    </div>
+     
+
+    <div class="display-label">User Images Root Path:&nbsp;<strong>
+        @Html.DisplayFor(model => model.UserImagesRootPath)</strong><br /><em>
+                                                              (The Path to the folder where user profile photos are stored.)</em>
+    </div>
+     
+
+    <div class="display-label">Default User Photo:&nbsp;<strong>
+       @Html.DisplayFor(model => model.DefaultUserPhoto)</strong><br /><em>
+                                                           (The default photo for users, which should reside in the UserImagesRootPath.)</em>
+    </div>
+    
+
+</fieldset>
+
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/tools.png")"    title="Initial Database Schema Settings"  alt="Initial Database Schema Settings" />Initial Database Schema Settings</legend>
+
+    <div class="display-label">Drop Recreate Database? <strong>(NOT RECOMMENDED FOR PROD)</strong>:<strong> @Html.DisplayFor(model => model.DropRecreateDatabase)</strong><br/>
+        <em>(If true, model changes will cause the database to be dropped and recreated.) </em>
+    </div>
+    
+    <div class="display-label">Create Sample Roles And Users? <strong>(NOT RECOMMENDED FOR PROD)</strong>:<strong> @Html.DisplayFor(model => model.CreateSampleRolesAndUsers)</strong>
+        <br/><em>(If DropRecreateDatabase is true, you can create sample roles and users.)</em> 
+    </div>
+  
+
+    <div class="display-label">Number Of Sample Users to create <strong>(NOT RECOMMENDED FOR PROD) 
+    </strong>:<strong>@Html.DisplayFor(model => model.NumberOfSampleUsers)</strong>
+        <br/><em>(If CreateSampleRolesAndUsers is true, this is the number of sample users to create.)</em><strong>Keep below 10,000!</strong> 
+       
+    </div>
+    
+
+    <div class="display-label">Domain Url:<strong> @Html.DisplayFor(model => model.DomainUrl)</strong><br/>
+       <em> Upon initialization test users will have this email domain.</em></div>
+     
+
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/transfer.png")"    title="Email Server"  alt="Email Server" />Email Server Settings</legend>
+    <div class="display-label">Smtp Server:<strong> @Html.DisplayFor(model => model.SmtpServer)</strong></div>
+    <div class="display-label">Smtp Server Port:<strong>@Html.DisplayFor(model => model.SmtpServerPort)</strong> </div>
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/email.png")"    title="Email Server"  alt="Email Server" />Welcome Email Settings</legend>
+    <div class="display-label">Send Welcome Email?:<strong> @Html.DisplayFor(model => model.SendWelcomeEmail)</strong></div>
+    <div class="display-label">Welcome Email Sender:<strong> @Html.DisplayFor(model => model.WelcomeEmailSender)</strong></div>
+    <div class="display-label">Welcome Email Subject:<strong> @Html.DisplayFor(model => model.WelcomeEmailSubject)</strong></div>
+    <div class="display-label">Welcome Email Body:</div>
+    <div class="emailpreview">@MvcHtmlString.Create(@Model.WelcomeEmailBody)
+    </div>
+    <p>
+        <em>The markers will be replaced in the email body with the markers in the Marker Settings.<br/>
+            The HTML markup in the web config should be decoded for proper parsing.</em>
+            </p>
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/password.png")"    title="Password Settings"  alt="Password Settings" />Reset Password Email Settings</legend>
+    <div class="display-label">Send Reset Password Email?:<strong> @Html.DisplayFor(model => model.SendResetPasswordEmail)</strong></div>
+    <div class="display-label">Password Reset Expires (In Days):<strong> @Html.DisplayFor(model => model.PasswordResetExpireInDays)</strong></div>
+     <div class="display-label">Reset Password Link:<strong> @Html.DisplayFor(model => model.ResetPasswordLink)</strong></div>
+    <div class="display-label">Reset Password Sender: <strong>@Html.DisplayFor(model => model.ResetPasswordSender)</strong></div>
+    <div class="display-label">Reset Password Subject: <strong>@Html.DisplayFor(model => model.ResetPasswordSubject)</strong></div>
+    <div class="display-label">Reset Password Email Body:</div>
+    <div class="emailpreview">@MvcHtmlString.Create(@Model.ResetPasswordEmailBody)</div>
+    <p>
+        <em>The markers will be replaced in the email body with the markers in the Marker Settings.<br/>
+            The HTML markup in the web config should be decoded for proper parsing.</em>
+            </p>
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/qubert.png")"    title="Marker Settings"  alt="Marker Settings" />Marker Settings</legend>
+    <em>The markers below will be replaced in the email bodies above with the appropriate value.</em>
+    <div class="display-label">User Name Marker: <strong>@Html.DisplayFor(model => model.UserNameMarker)</strong></div>
+    <div class="display-label">User Email Marker:<strong> @Html.DisplayFor(model => model.UserEmailMarker)</strong></div>
+     <div class="display-label">Email ResetLink Marker:<strong> @Html.DisplayFor(model => model.EmailResetLinkMarker)</strong>
+     <br/><em>(The link to reset the password in the email body will be replaced with the value in ResetPasswordLink).</em></div>
+    <div class="display-label">Domain Url Marker:<strong> @Html.DisplayFor(model => model.DomainUrlMarker)</strong></div>
+</fieldset>
+ 
+<p>
+   @Html.ActionLink("Back to Administration", "Index")
+</p>

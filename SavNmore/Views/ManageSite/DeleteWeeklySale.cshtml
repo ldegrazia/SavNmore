@@ -1,0 +1,34 @@
+﻿@model savnmore.Models.WeeklySale
+
+@{
+    ViewBag.Title = "Delete Weekly Sale";
+}
+
+<h2>Delete Weekly Sale</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>WeeklySale</legend>
+
+    <div class="display-label">StartsOn</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartsOn)
+    </div>
+
+    <div class="display-label">EndsOn</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndsOn)
+    </div>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoreId)
+    </div>
+</fieldset>
+@using (Html.BeginForm("DeleteSale", "ManageSite", new{id=@Model.Id},FormMethod.Post,null))
+{
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

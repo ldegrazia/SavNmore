@@ -1,0 +1,21 @@
+﻿@model IEnumerable<savnmore.Models.Store>
+
+@{
+    ViewBag.Title = "Find Stores";
+}
+<p>@Html.ActionLink("Back to Chains", "Index","Chain")</p>
+<div id="findstoresnear">
+    @using (Html.BeginForm("FindStoresNear","Location",FormMethod.Post,null))
+    {
+        <text><label>Find stores within</label>  @Html.DropDownList("FindMiles") 
+            <span class="ofzip">of Zip</span> @Html.TextBox("zipsearch", ViewBag.CurrentZipSearch as string)
+            <input id="findstoresnearbutton" value="Go" type="image"  src="../../images/go.png"/>  
+             <input value="Go" type="submit" class="mobilesubmit"/> </text>
+    }
+     
+</div>
+<div class="clear"></div>
+ 
+<h3>@Model.Count() Stores Found near Zip @ViewBag.CurrentZipSearch</h3>
+  @{Html.RenderPartial("_StoreSearch", Model );}
+<p>@Html.ActionLink("Back to Chains", "Index","Chain")</p>

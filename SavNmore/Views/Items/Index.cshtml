@@ -1,0 +1,173 @@
+﻿@using savnmore.Models
+@model  PagedList.IPagedList<Item>
+@{
+    ViewBag.Title = "Sale Items";
+}
+@{ WeeklySale s = @ViewBag.WeeklySale;
+   Store str = @ViewBag.Store; }
+     <script src="@Url.Content("~/Scripts/utilities.js")" type="text/javascript"></script>
+ 
+<h2>@Html.ActionLink(@str.Name, "Details", "Store", new { id = str.Id }, null) </h2>
+
+<div class="storeaddress">
+                            @Html.DisplayFor(p => str.Address.Address1) <br/>
+                            @Html.DisplayFor(p => str.Address.City), @Html.DisplayFor(p => str.Address.State) 
+                            @Html.DisplayFor(p => str.Address.Zip) 
+                        </div>
+<a id="top"></a>
+
+ 
+<div class="page_wrapper">
+    <h3> Sale from  @Html.DisplayFor(p => @s.StartsOn) to @Html.DisplayFor(p => @s.EndsOn)</h3>
+    @using (Html.BeginForm()) 
+    { 
+        <div class="page_left">
+            <div id="searchfor">
+                <label for="SearchString">Search for an item</label>      
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "searchforInput"})   
+                <input value="Go" id="searchforsubmitButton" type="image"   src="../../images/go.png"/>
+                <input value="Go" type="submit" class="mobilesubmit"/>
+            </div>  
+        </div>
+        <div class="page_right"> 
+            <div id="sort">
+                <label for="sortOrder">Sort items based on</label>                   
+                @Html.DropDownList("sortOrder", (IEnumerable<SelectListItem>)ViewBag.SortOptions,new {onchange="this.form.submit();"})                  
+            </div>
+        </div>    
+    } 
+   
+    <div class="clear"></div>
+ 
+  
+    <div class="page_left">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+        of @Model.PageCount (@ViewBag.TotalItems items) | @Html.ActionLink("Back To Store", "Details","Store", new { id=str.Id },null) 
+    </div>
+    <div class="page_right"> 
+  
+        @if (Model.HasPreviousPage) 
+        { 
+        
+            @Html.ActionLink("<<", "Index", new {id=@s.Id, page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  }) 
+            @Html.Raw(" "); 
+            @Html.ActionLink("< Prev", "Index", new { id = @s.Id, page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+        } 
+        else 
+        { 
+            @:<< 
+            @Html.Raw(" "); 
+            @:< Prev 
+        } 
+ 
+        @if (Model.HasNextPage) 
+        { 
+            @Html.ActionLink("Next >", "Index", new { id = @s.Id, page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+            @Html.Raw(" "); 
+            @Html.ActionLink(">>", "Index", new { id = @s.Id, page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+        } 
+        else 
+        { 
+            @:Next > 
+            @Html.Raw(" ") 
+            @:>> 
+        }
+  
+    </div>  
+    <div class="clear"></div>
+</div>
+ 
+    
+        @foreach (var item in Model)
+        {
+            <text>
+                <div class="itemdetail">
+                    <div class="itemdetail_image">
+                        <img src="@item.ImageUrl"   alt="@item.Name" title="@item.Name"/>
+                        </div>
+                    <div class="itemfulldetails">
+                        @Html.ActionLink(@item.Name, "Details", new { id = item.Id })<br/>
+                        <div class="itemfulldescription">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                        <div class="itemfulldetailsprice">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </div>
+                         <div class="itemfulldetailsmenu">
+                            <input  type="image"   src="../../images/checklist-icon.png" 
+                                    title="Go to your shopping list"  
+                                    alt="Go to your shopping list" 
+                                    onclick="location.href='@Url.Content("~/ShoppingList/Index")'"/>
+                            <input type="image"  
+                                   alt="Add 1 item to your shopping list" 
+                                   title="Add 1 item to your shopping list"   
+                                   src="../../images/add-icon.png" 
+                                   onclick="AddItemShowTotal('@item.Id','@str.Id');"/>
+                            @{
+                                string id = "r" + item.Id;
+                                string show = "none";//visibility:
+                                if (item.OnList)
+                                {
+                                    show = "";
+                                }
+                            }
+                            <input id='@id' 
+                                   style="display:@show" 
+                                   type="image" 
+                                   src="../../images/remove-icon.png" 
+                                   title="Remove this item from your shopping list"  
+                                   alt="Remove this item from your shopping list"  
+                                   onclick="RemoveItemShowTotal('@item.Id','@str.Id');"/>
+                        
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div> 
+            </text>
+        }
+     
+     
+<div class="page_wrapper">  
+     <div class="page_left">
+             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+             of @Model.PageCount (@ViewBag.TotalItems items) | @Html.ActionLink("Back To Store", "Details","Store", new { id=str.Id },null) 
+         </div>
+        <div class="page_right"> 
+  
+    @if (Model.HasPreviousPage) 
+    { 
+        
+        @Html.ActionLink("<<", "Index", new { id = @s.Id, page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink("< Prev", "Index", new { id = @s.Id, page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+    } 
+    else 
+    { 
+        @:<< 
+        @Html.Raw(" "); 
+        @:< Prev 
+    } 
+ 
+    @if (Model.HasNextPage) 
+    { 
+        @Html.ActionLink("Next >", "Index", new { id = @s.Id, page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+        @Html.Raw(" "); 
+        @Html.ActionLink(">>", "Index", new { id = @s.Id, page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) 
+    } 
+    else 
+    { 
+        @:Next > 
+        @Html.Raw(" ") 
+        @:>> 
+    }
+  
+        </div>  
+    <div class="clear"></div>
+</div>
+<div class="bigspace">
+<p><a href="#top">top of page</a> | @Html.ActionLink("Back To Store", "Details","Store", new { id=str.Id },null)</p>
+</div>
+
+ 
+
+ 

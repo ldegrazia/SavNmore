@@ -1,0 +1,37 @@
+﻿@using savnmore.Models
+@model Store
+@{
+    ViewBag.Title = @Model.Name + " Details";
+}
+<p> 
+@Html.ActionLink("Back to All Stores", "Details", "Chain", new { id = @ViewBag.ChainId}, null)
+</p>
+ <div class="storedetail">
+<div class="storedetail_top">
+ <h2>@Html.DisplayFor(model => model.Name)</h2>
+  <div class="storeaddress">
+                    @Html.DisplayFor(model => model.Address.Address1) <br/>
+@Html.DisplayFor(model => model.Address.City), @Html.DisplayFor(model => model.Address.State) 
+@Html.DisplayFor(model => model.Address.Zip)  
+
+  </div>            
+ 
+ </div>
+     <div class="storedetail_bottom">
+       <div class="weeklysalesimg">
+             <img class="left" src="../../images/sales.png" alt="Weekly Shopping Made Easy" title="Weekly Shopping Made Easy" />   
+        </div>
+        <div class="weeklysales">
+             @foreach(WeeklySale ws in Model.WeeklySales)
+             {
+                 <text> 
+                     @Html.ActionLink(@ws.SaleItems.Count() +" Items on sale until " + @Html.DisplayFor(w => ws.EndsOn), "Index", "Items", new { id=ws.Id },null)<br/>
+               
+                 </text>
+             }
+         </div>
+         <div class="clear"></div>
+     </div>
+ <div class="clear"></div>
+ </div>
+   

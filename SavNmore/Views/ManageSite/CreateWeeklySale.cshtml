@@ -1,0 +1,47 @@
+﻿@model savnmore.Models.WeeklySale
+
+@{
+    ViewBag.Title = "Create New Weekly Sale";
+}
+
+<h2>Create Weekly Sale</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-1.5.1.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.js")" type="text/javascript"></script>
+  <link href="@Url.Content("~/Content/jquery-ui-1.8.21.custom.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(document).ready(function () { $('.date').datepicker({ dateFormat: "mm/dd/yy" }); });
+
+
+</script>
+@using (Html.BeginForm("CreateWeeklySale","ManageSite", new { storeId = @ViewBag.StoreId }, FormMethod.Post) ){
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>WeeklySale</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartsOn)
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("StartsOn",@Model.StartsOn.ToShortDateString(),new{@class="date"})
+            @Html.ValidationMessageFor(model => model.StartsOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndsOn)
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("EndsOn", @Model.EndsOn.ToShortDateString(), new { @class = "date" })
+            @Html.ValidationMessageFor(model => model.EndsOn)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+    }
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

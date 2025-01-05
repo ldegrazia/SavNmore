@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Local Sales";
+}
+<div class="bigspace">
+    Find stores close by and browse their weekly specials.
+    <p>
+Just enter your zip code and choose a search radius below.
+                                                        </p> 
+
+</div>
+<div id="findstoresnear">
+    @using (Html.BeginForm("FindStoresNear","Location",FormMethod.Post,null))
+    {
+        <text><label>Find stores within</label>  @Html.DropDownList("FindMiles") 
+            <span class="ofzip">of Zip</span> @Html.TextBox("zipsearch", ViewBag.CurrentZipSearch as string)
+            <input id="findstoresnearbutton" value="Go" type="image"  src="../../images/go.png"/> 
+             <input value="Go" type="submit" class="mobilesubmit"/>  </text>
+    }
+</div>
+<div class="clear"></div>

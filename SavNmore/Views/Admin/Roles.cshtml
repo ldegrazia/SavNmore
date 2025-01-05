@@ -1,0 +1,45 @@
+﻿@using savnmore.Models
+@model IEnumerable<Role>
+@{
+    ViewBag.Title = "Roles";
+}
+<h3>Roles (@Model.Count()) | @Html.ActionLink("Create a New Role", "Create", null, new { @title = "Create a new role" }) | @Html.Partial("_AdminNavigationPartial")</h3>
+<span class="result"> @ViewBag.Result </span>
+<table>
+            <tr>
+                <th></th>
+                <th>Read Only?</th>
+                <th>Role Name</th>
+                <th>Role Description</th>
+                 <th>Role Member Count </th>
+                <th>Role Actions</th>
+            </tr>
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td>            
+                        <img height="100" width="100" src="@Url.Action("RolePhoto", "Admin", new { name = item.Photo })" alt="@item.Name" title="@item.Name"/> 
+                    </td>
+                     <td style="text-align:center;">
+                       @Html.DisplayFor(m=> item.IsReadOnly)  
+                    </td>
+                    <td>
+                        @item.Name  
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                     <td  style="text-align:right;padding:10px;">
+                        @item.MemberCount
+                    </td>
+                    <td> 
+             
+                        @Html.ActionLink("View Members", "Details", new { id = item.RoleId }, new { @title = "View, add and remove members" }) |    @Html.ActionLink("Edit This Role", "Edit", new { id = item.RoleId }, new { @title = "Change the role name, picture and description" }) | @Html.ActionLink("Delete This Role", "DeleteRole", new { id = item.RoleId }, new { @title = "Delete this role and all members (Confirmation Required)" }) 
+            
+           
+             
+                    </td>
+                </tr>
+            }
+
+        </table>

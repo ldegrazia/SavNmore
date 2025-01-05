@@ -1,0 +1,47 @@
+﻿@using savnmore
+@{
+    ViewBag.Title = "ApplicationName";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<h3>Manage Applications | @Html.Partial("_AdminNavigationPartial") </h3>
+<p>
+    <span class="validation-summary-errors"> @ViewBag.Result</span>
+    </p> 
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/sitesettings.png")"    title="Application Context"  alt="Application Context" />Change Application Context</legend>
+
+
+    <p>You are currently managing:<strong> @ViewBag.CurrentAppName</strong></p>
+    <p>You can manage another set of users and roles associated with an entirely different application name.</p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="editor-label">
+            <img class="left small"  src="@Url.Content("~/images/warning.png")"    title="Warning"  alt="Warning?" />Changing your application context below will:
+                <ul>
+                    <li> <strong>Log you off the current application (@ViewBag.CurrentAppName)</strong></li>
+                    <li>Set your context to the selected application name</li>
+                </ul>
+            Change Application Context To:
+            @Html.DropDownList(FormKeys.ChangeAppName, (SelectList)ViewBag.AvailableAppNames, new { @title = "Choose an application name to manage." })         
+        
+            <input type="submit"  title="Logs you off the current Application and changes to the new application name."  value="Change Application" />
+            
+        </div>
+    }
+</fieldset>
+<fieldset>
+    <legend><img class="small"  src="@Url.Content("~/images/newapp.png")"    title="Application Context"  alt="Application Context" />Create a New Application</legend>
+
+<p>Use this form to create a new application with an entirely seperate set of users and roles.</p>
+<p>Enter a new application name and click Create. If the name is not already in use, a new Application will be created with a default Administrator account and two default roles, Users and Administrators.
+<br />
+After successful creation, you will be able to change your context to the newly created context and manage users and roles in a new Application instance.
+</p>
+@using (Html.BeginForm("CreateAppName", "Admin", FormMethod.Post,new { @onsubmit = "return confirm('Create New Application?')" }))
+{
+    <text>New Application Name:&nbsp;<input title="New Application Name (Must be Unique)." type="text" name="@FormKeys.NewAppName" id="@FormKeys.NewAppName" />
+        <input title="Create new application name and add default Admin." type="submit" value="Create " /></text>
+}
+ </fieldset>

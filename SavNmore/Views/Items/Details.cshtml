@@ -1,0 +1,36 @@
+﻿@model savnmore.Models.Item
+@using savnmore.Models;
+@{
+    ViewBag.Title = "Details";
+}
+<script src="@Url.Content("~/Scripts/utilities.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+<a id="top"></a>
+
+<h5>@Html.ActionLink("Back to Sale Items", "Index", new { id = @ViewBag.WeeklySaleId })</h5>
+
+@{Html.RenderPartial("_ItemFullDetails",Model);}
+
+   @using (Ajax.BeginForm("FindSimilarItems", "Location", new { itemid = @Model.Id, storeid = @ViewBag.StoreId }, new AjaxOptions { UpdateTargetId = "productList",LoadingElementId = "loadingdiv"}))
+   {
+       <div id="searchsimilar">
+           <label for="searchFor">Search for</label>      
+           @Html.TextBox("searchFor", @ViewBag.SearchFor as string)
+           <span class="mileslabel">within</span>@Html.DropDownList("Miles")
+           <input value="Go" id="searchsimilarButton" type="image"  src="../../images/go.png"/>
+           <input value="Go" type="submit" class="mobilesubmit"/>
+       </div> 
+       <div class="clear"></div>
+   }
+<div id="loadingdiv"> <!-- style="display:none;">-->
+    <img src="../../images/loading.gif" alt="Loading.."/>
+    </div>
+<div id='productList'>     
+  </div> 
+
+  
+                    
+<h5>@Html.ActionLink("Back to Sale Items", "Index", new { id = @ViewBag.WeeklySaleId })</h5>
+
+ 
